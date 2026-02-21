@@ -11,26 +11,21 @@ author:
       city: Москва
       address: ул. Миклухо-Маклая, д.15
 
-title: "Презентация по лабораторной работе1"
+title: "Презентация по лабораторной работе 1"
 subtitle: "Математическое моделирование"
 license: "CC BY"
-
 lang: ru
 
 format:
-  beamer:
-    pdf-engine: xelatex
-    include-in-header:
+  beamer: 
+    pdf-engine: lualatex
+    include-in-header: 
       - text: |
-          \usepackage{polyglossia}
-          \setdefaultlanguage{russian}
-          \setotherlanguage{english}
           \usepackage{fontspec}
-          \setmainfont{Times New Roman}
-          \setsansfont{Arial}
-          \setmonofont{Courier New}
-  revealjs:
-    lang: ru
+          \setmainfont{DejaVu Serif}
+          \setsansfont{DejaVu Sans}
+          \setmonofont{DejaVu Sans Mono}
+  revealjs: default
 ---
 
 ```{julia}
