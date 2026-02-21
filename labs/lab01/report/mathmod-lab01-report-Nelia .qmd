@@ -1,20 +1,20 @@
 ---
 ## Author
 author:
-  name: Дмитрий Сергеевич Кулябов
+  name: Нджову Нелиа
   degrees: DSc
   orcid: 0000-0002-0877-7063
-  email: kulyabov-ds@rudn.ru
+  email: 1032239033@rudn.ru
   affiliation:
     - name: Российский университет дружбы народов
       country: Российская Федерация
       postal-code: 117198
       city: Москва
-      address: ул. Миклухо-Маклая, д. 6
+      address: ул. Миклухо-Маклая, д.15
 
 ## Title
-title: "Шаблон отчёта по лабораторной работе"
-subtitle: "Простейший вариант"
+title: "Отчёта по лабораторной работе1"
+subtitle: "Математическое моделирование"
 license: "CC BY"
 ---
 
