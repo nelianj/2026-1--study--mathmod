@@ -1,0 +1,41 @@
+// Исходные данные
+s = 18.3; // начальное расстояние от лодки до катера
+n = 4.9; // отношение скоростей катера и лодки
+fi = %pi / 4; // угол направления движения лодки
+// Функция, описывающая движение катера береговой охраны
+function dr = f(theta, r)
+dr = r / sqrt(n*n - 1);
+endfunction
+// Начальные условия для первого случая (катер ближе к полюсу)
+r0_1 = s / (n + 1); // x1 = k / (n + 1)
+theta0_1 = 0;
+theta = 0:0.01:2*%pi;
+r1 = ode(r0_1, theta0_1, theta, f);
+// Начальные условия для второго случая (катер дальше от полюса)
+r0_2 = s / (n - 1); // x2 = k / (n - 1)
+theta0_2 = -%pi;
+theta2 = -%pi:0.01:%pi;
+r2 = ode(r0_2, theta0_2, theta2, f);
+// Функция движения лодки браконьеров
+function xt = f2(t)
+xt = tan(fi) * t;
+endfunction
+t = 0:1:25;
+// Calculate intersection points
+theta_intersect = fi;
+r_intersect1 = r0_1 * exp(theta_intersect / sqrt(n*n - 1));
+r_intersect2 = r0_2 * exp((theta_intersect + %pi) / sqrt(n*n - 1));
+
+printf("Case 1 (θ₀=0): r = %f km\n", r_intersect1);
+printf("Case 2 (θ₀=-π): r = %f km\n", r_intersect2);
+// Графики
+clf;
+subplot(1,2,1);
+polarplot(theta, r1, style=color('brown')); // катер (случай 1)
+plot2d(t, f2(t), style=color('red')); // лодка
+subplot(1,2,2);
+polarplot(theta2, r2, style=color('purple')); // катер (случай 2)
+plot2d(t, f2(t), style=color('red')); // лодка
+// Отображение графиков
+xtitle("Траектории движения катера и лодки (случай 1 - слева, случай 2 - справа", "�",
+legend("Катер (случай 1)", "Лодка", "Катер (случай 2)");
