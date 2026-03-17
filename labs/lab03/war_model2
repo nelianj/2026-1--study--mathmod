@@ -1,0 +1,48 @@
+x0 = 118000;
+
+y0 = 90000;
+
+t0 = 0;
+
+a = 0.231;
+
+b = 0.785;
+
+c = 0.451;
+
+h = 0.158;
+
+tmax = 1;
+
+dt = 0.000001;
+
+t = [t0:dt:tmax];
+
+function p = P(t)
+    p = cos(2*t);
+endfunction
+
+function q = Q(t)
+    q = sin(3*t);
+endfunction
+
+function dy = syst(t,y)
+    dy(1) = -a*y(1)-b*y(2)+P(t);
+    dy(2) = -c*y(1)*y(2)-h*y(2)+Q(t);
+endfunction
+
+v0 = [x0;y0];
+
+y = ode(v0,t0,t,syst);
+
+scf(0);
+
+clf();
+
+plot2d(t, y(1,:), style=2, rect=[0, 0, 0.0002, 40000]);
+
+plot2d(t, y(2,:), style=5, rect=[0, 0, 0.0002, 40000]);
+
+xtitle("Модель боевых действий № 1", "Шаг", "Численность армии");
+
+xgrid();
