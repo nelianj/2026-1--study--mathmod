@@ -20,7 +20,5 @@ plot(solution2,
      xaxis = "t, время",
      yaxis = "Численность армии",
      linewidth = 2,
-     legend = :topright,
-     xlimit = [0,0.0002],
-     ylimit = [0, 40000])
+     legend = :topright)
 savefig("war_model2.png")
