@@ -1,0 +1,855 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Групповой проект. Этап 2},
+  pdfauthor={Вакутайпа Милдред, Разанацуа Сара Естэлл, Нджову Нелиа},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Групповой проект. Этап 2}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Алгоритм решения задачи Рост дендритов}
+\author{Вакутайпа Милдред, Разанацуа Сара Естэлл, Нджову Нелиа}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+\setstretch{1.5}
+\chapter{Введение}\label{ux432ux432ux435ux434ux435ux43dux438ux435}
+
+\section{Актуальность}\label{ux430ux43aux442ux443ux430ux43bux44cux43dux43eux441ux442ux44c}
+
+Дендрит - это характерная древовидная структура кристаллов, растущих по
+мере затвердевания расплавленного металла, форма, получаемая в
+результате более быстрого роста в энергетически выгодных
+кристаллографических направлениях.
+
+Процессы кристаллизации и роста дендритов играют ключевую роль в
+различных областях науки и техники. В металлургии и материаловедении
+структура затвердевших металлов и сплавов, образующаяся в процессе
+литья, сварки и аддитивного производства, определяет их механические
+свойства --- прочность, пластичность и усталостную долговечность.
+Дендритная микроструктура, возникающая при неравновесном затвердевании,
+непосредственно влияет на распределение примесей, образование пор и
+трещин, а также на последующую термообработку материала.
+
+В природе дендритные структуры также широко распространены: от снежинок
+и морозных узоров на стекле до минеральных образований в геологических
+процессах. Понимание механизмов роста дендритов важно не только для
+технологических применений, но и для фундаментальной физики
+неравновесных процессов структурообразования. Несмотря на многолетние
+исследования, проблема управляемого управления дендритной
+микроструктурой остается актуальной.
+
+\section{Цель}\label{ux446ux435ux43bux44c}
+
+Целью данной работы является написание алгоритма реализации модели роста
+дендритов.
+
+\section{Задачи}\label{ux437ux430ux434ux430ux447ux438}
+
+Изучите алгоритм модели роста дендритов и опишите основные этапы работы
+алгоритма
+
+\chapter{Алгоритм}\label{ux430ux43bux433ux43eux440ux438ux442ux43c}
+
+\section{Шаг 1: Настройка параметров
+модели}\label{ux448ux430ux433-1-ux43dux430ux441ux442ux440ux43eux439ux43aux430-ux43fux430ux440ux430ux43cux435ux442ux440ux43eux432-ux43cux43eux434ux435ux43bux438}
+
+Первый этап включает в себя определение физических свойств материала и
+вычислительных параметров для моделирования. Корректность входных данных
+определяет надежность всего процесса моделирования.
+
+\subsection{Физические свойства
+материала:}\label{ux444ux438ux437ux438ux447ux435ux441ux43aux438ux435-ux441ux432ux43eux439ux441ux442ux432ux430-ux43cux430ux442ux435ux440ux438ux430ux43bux430}
+
+\begin{itemize}
+\tightlist
+\item
+  Плотность \(\rho\): определяет массу на единицу объема материала.
+\item
+  Удельная теплоемкость \(c_p\): количество энергии, необходимо для
+  нагрева единицы массы на один градус.
+\item
+  Скрытая теплота плавления \(L\): энергия фазавого перехода
+\item
+  Теплопроводность \(\kappa\): способность материала передавать тепловую
+  энергию
+\item
+  Коэффициент температуропроводности \(\chi = \kappa/(\rho c_p)\):
+  скорость выравнивания температурного градиента
+\item
+  Температура плавления \(T_m\): критическая точка фазового перехода
+\item
+  Коэффициент поверхностного натяжения \(\gamma\): влияет на
+  стабильность границы раздела фаз
+\item
+  Кинетический коэффициент \(\beta\): характеризует скорость
+  прикрепления атомов к поверхности кристалла{[}1,2{]}
+\end{itemize}
+
+\subsection{Вычислительные
+параметры}\label{ux432ux44bux447ux438ux441ux43bux438ux442ux435ux43bux44cux43dux44bux435-ux43fux430ux440ux430ux43cux435ux442ux440ux44b}
+
+\begin{itemize}
+\tightlist
+\item
+  Размер сетки \(N \times N\): Количество узлов по каждому измерению
+\item
+  Пространственный шаг \(h\): Расстояние между соседними узлами
+\item
+  Временной шаг роста \(\Delta\): Интервал одного шага роста
+\item
+  Число подшагов \(m\): Количество подшагов тепловой диффузии
+\item
+  Капиллярный параметр \(\lambda\): Интенсивность стабилизации границы
+\item
+  Амплитуда шума \(\delta\): Уровень тепловых флуктуаций{[}3{]}
+\end{itemize}
+
+\subsection{Начальные и граничные
+условия:}\label{ux43dux430ux447ux430ux43bux44cux43dux44bux435-ux438-ux433ux440ux430ux43dux438ux447ux43dux44bux435-ux443ux441ux43bux43eux432ux438ux44f}
+
+\begin{itemize}
+\tightlist
+\item
+  Начальная температура расплава \(T_\infty\): определяет степень
+  переохлаждения системы
+\item
+  Безразмерное переохлаждение \(S = c_p (T_m - T_\infty)/L\): ключевой
+  параметр термодинамической готовности системы
+\item
+  Граничные условия: постоянная температура на всех границах расчетной
+  области, равная начальной температуре расплава \(T_\infty\){[}4{]}
+\end{itemize}
+
+\section{Шаг 2: Инициализация структур
+данных}\label{ux448ux430ux433-2-ux438ux43dux438ux446ux438ux430ux43bux438ux437ux430ux446ux438ux44f-ux441ux442ux440ux443ux43aux442ux443ux440-ux434ux430ux43dux43dux44bux445}
+
+На втором этапе создаются структуры данных для хранения состояния
+системы и задается начальная конфигурация.
+
+\subsection{Структуры
+данных:}\label{ux441ux442ux440ux443ux43aux442ux443ux440ux44b-ux434ux430ux43dux43dux44bux445}
+
+Создаются два двумерных массива размером \(N \times N\):
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Массив фазового состояния \(phase[i][j]\):
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  \(phase[i][j] = 1\) --- твердая фаза
+\item
+  \(phase[i][j] = 0\) --- жидкая фаза
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Массив безразмерной температуры \(T[i][j]\):
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Хранит текущее значение безразмерной температуры в каждом узле
+\end{itemize}
+
+\subsection{Инициализация:}\label{ux438ux43dux438ux446ux438ux430ux43bux438ux437ux430ux446ux438ux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Заполнение массивов начальными значениями:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Все узлы: \(phase[i][j] = 0\) (жидкое состояние)
+\item
+  Все узлы: \(T[i][j] = 0\) (безразмерная температура расплава)
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Создание затравки кристаллизации:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  В центральной области сетки задается твердая затравка (например,
+  квадрат \(5 \times 5\) узлов)
+\item
+  Для узлов затравки: \(phase[i][j] = 1\) (твердое состояние)
+\item
+  Для узлов затравки: \(T[i][j] = \tilde{T}_m\) (безразмерная
+  температура плавления)
+\end{itemize}
+
+\section{Шаг 3: Расчет температурного
+поля}\label{ux448ux430ux433-3-ux440ux430ux441ux447ux435ux442-ux442ux435ux43cux43fux435ux440ux430ux442ux443ux440ux43dux43eux433ux43e-ux43fux43eux43bux44f}
+
+Третий шаг реализует численное решение уравнения теплопроводности для
+расчета эволюции температурного поля.{[}3{]}
+
+\subsection{Дискретизация уравнения
+теплопроводности:}\label{ux434ux438ux441ux43aux440ux435ux442ux438ux437ux430ux446ux438ux44f-ux443ux440ux430ux432ux43dux435ux43dux438ux44f-ux442ux435ux43fux43bux43eux43fux440ux43eux432ux43eux434ux43dux43eux441ux442ux438}
+
+Используется явная конечно-разностная схема. Лапласиан в узле \((i,j)\)
+аппроксимируется с учетом ближайших и диагональных соседей:
+
+\[
+\nabla^2 T \approx \frac{\langle T_{(i,j)} \rangle - T_{i,j}}{(4 + 4w)(1 + 2w)h^2}
+\]
+
+где среднее значение температуры соседей:
+
+\[
+\langle T_{(i,j)} \rangle = \frac{ (T_{i+1,j} + T_{i-1,j} + T_{i,j+1} + T_{i,j-1}) + w (T_{i+1,j+1} + T_{i+1,j-1} + T_{i-1,j+1} + T_{i-1,j-1}) }{4 + 4w}
+\]
+
+Коэффициент \(w = 1/2\) определяет вклад диагональных соседей.{[}4{]}
+
+\subsection{Алгоритм расчета тепловой
+диффузии:}\label{ux430ux43bux433ux43eux440ux438ux442ux43c-ux440ux430ux441ux447ux435ux442ux430-ux442ux435ux43fux43bux43eux432ux43eux439-ux434ux438ux444ux444ux443ux437ux438ux438}
+
+Для каждого шага роста \(\Delta t\) выполняется \(m\) подшагов тепловой
+диффузии:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Для каждого узла сетки \((i, j)\) вычислить лапласиан
+  \(\nabla^2 T_{i,j}\) по приведенной формуле
+\item
+  Обновить температуру:
+  \(T_{i,j}^{new} = T_{i,j} + \chi \frac{\Delta t}{m} \nabla^2 T_{i,j}\)
+\item
+  Применить граничные условия постоянной температуры:
+  \(T_{граница} = 0\)
+\end{enumerate}
+
+\subsection{Условие
+устойчивости:}\label{ux443ux441ux43bux43eux432ux438ux435-ux443ux441ux442ux43eux439ux447ux438ux432ux43eux441ux442ux438}
+
+\[
+\frac{\chi \Delta t}{m h^2} < \frac{1}{4}
+\]
+
+\section{Шаг 4: Моделирование роста
+дендритов}\label{ux448ux430ux433-4-ux43cux43eux434ux435ux43bux438ux440ux43eux432ux430ux43dux438ux435-ux440ux43eux441ux442ux430-ux434ux435ux43dux434ux440ux438ux442ux43eux432}
+
+На четвертом этапе после завершения всех подшагов тепловой диффузии
+выполняется проверка условий затвердевания и обновление фазового
+состояния.
+
+\subsection{Порядок
+обновления:}\label{ux43fux43eux440ux44fux434ux43eux43a-ux43eux431ux43dux43eux432ux43bux435ux43dux438ux44f}
+
+Важной особенностью алгоритма является последовательное обновление:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Сначала полностью рассчитывается температурное поле на текущем шаге
+  (все \(m\) подшагов)
+\item
+  Затем, на основе полученного температурного поля, проверяются условия
+  затвердевания
+\end{enumerate}
+
+\subsection{Вычисление кривизны
+границы:}\label{ux432ux44bux447ux438ux441ux43bux435ux43dux438ux435-ux43aux440ux438ux432ux438ux437ux43dux44b-ux433ux440ux430ux43dux438ux446ux44b}
+
+Для жидкого узла, имеющего хотя бы один твердый сосед, вычисляется
+дискретизированная кривизна:{[}3{]}
+
+\[
+s_{i,j} = \sum_{\text{nearest}} n_{i,j} + w_n \sum_{\text{diagonal}} n_{i,j} - \left( \frac{5}{2} + \frac{5}{2} w_n \right)
+\]
+
+где:
+
+\begin{itemize}
+\tightlist
+\item
+  \(n_{i,j} = 1\) если соседний узел твердый, и \(0\) в противном случае
+\item
+  \(w_n = 1/2\) --- весовой коэффициент для диагональных соседей
+\item
+  \(s_{i,j} < 0\) для выпуклых участков (вершин), \(s_{i,j} > 0\) для
+  вогнутых
+\end{itemize}
+
+\subsection{Критерий
+затвердевания:}\label{ux43aux440ux438ux442ux435ux440ux438ux439-ux437ux430ux442ux432ux435ux440ux434ux435ux432ux430ux43dux438ux44f}
+
+Жидкий узел переходит в твердое состояние, если выполняется условие:
+
+\[
+T_{i,j} \le \tilde{T}_m + \lambda s_{i,j} + \eta_{i,j} \delta
+\]
+
+где:
+
+\begin{itemize}
+\item
+  \(\tilde{T}_m\) --- безразмерная температура плавления
+\item
+  \(\lambda\) --- капиллярный параметр, объединяющий эффекты
+  Гиббса--Томсона и кинетического переохлаждения{[}2{]}
+\item
+  \(s_{i,j}\) --- дискретизированная кривизна
+\item
+  \(\eta_{i,j}\) --- случайное число из равномерного распределения
+  \([-1, 1]\)
+\item
+  \(\delta\) --- амплитуда теплового шума{[}3{]}
+\end{itemize}
+
+\subsection{Алгоритм проверки
+затвердевания:}\label{ux430ux43bux433ux43eux440ux438ux442ux43c-ux43fux440ux43eux432ux435ux440ux43aux438-ux437ux430ux442ux432ux435ux440ux434ux435ux432ux430ux43dux438ux44f}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Полный обход всех узлов сетки \((i, j)\)
+\item
+  Для каждого узла:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Если \(phase[i][j] = 1\) (твердый), пропустить
+\item
+  Если \(phase[i][j] = 0\) (жидкий), проверить наличие твердых соседей
+\item
+  Если твердые соседи отсутствуют, пропустить
+\item
+  Если твердые соседи есть:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Вычислить \(s_{i,j}\) на основе соседних узлов
+  \item
+    Сгенерировать случайное число \(\eta_{i,j}\)
+  \item
+    Проверить критерий затвердевания
+  \item
+    Если условие выполнено:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      \(phase[i][j] = 1\) (переход в твердое состояние)
+    \item
+      \(T[i][j] = T[i][j] + 1\) (выделение скрытой теплоты){[}3{]}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\section{Шаг 5: Организация основного цикла
+вычислений}\label{ux448ux430ux433-5-ux43eux440ux433ux430ux43dux438ux437ux430ux446ux438ux44f-ux43eux441ux43dux43eux432ux43dux43eux433ux43e-ux446ux438ux43aux43bux430-ux432ux44bux447ux438ux441ux43bux435ux43dux438ux439}
+
+Пятый этап описывает структуру основного вычислительного цикла.
+
+\subsection{Блок-схема
+алгоритма:}\label{ux431ux43bux43eux43a-ux441ux445ux435ux43cux430-ux430ux43bux433ux43eux440ux438ux442ux43cux430}
+
+Алгоритм моделирования роста дендритов состоит из следующих основных
+этапов:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Начало: Запуск программы
+\item
+  Шаг 1: Настройка параметров модели
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Определение физических свойств материала (ρ, c\_p, κ, L, T\_m, γ, β)
+\item
+  Определение вычислительных параметров (N, h, Δt, m, λ, δ)
+\item
+  Определение начальных и граничных условий (T\_∞, T\_граница = T\_∞)
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Шаг 2: Инициализация массивов
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Создание массива фазового состояния phase{[}N{]}{[}N{]} (все узлы = 0
+  --- жидкие)
+\item
+  Создание массива температуры T{[}N{]}{[}N{]} (все узлы = 0)
+\item
+  Создание твердой затравки в центре (phase = 1, T = T̃\_m)
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Проверка условия остановки
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Если дендрит достиг границы → переход к завершению
+\item
+  Если не достиг → продолжение вычислений
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\tightlist
+\item
+  Шаг 3: Расчет температурного поля
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Выполнение m подшагов тепловой диффузии:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Для каждого узла вычислить лапласиан ∇²T
+  \item
+    Обновить температуру T\_new = T + χ·(Δt/m)·∇²T
+  \item
+    Применить граничные условия T\_граница = 0
+  \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{5}
+\tightlist
+\item
+  Шаг 4: Моделирование роста
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Обход всех узлов сетки:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Для каждого жидкого узла с твердыми соседями:
+
+    \begin{itemize}
+    \tightlist
+    \item
+      Вычислить кривизну s\_ij
+    \item
+      Сгенерировать случайный шум η\_ij
+    \item
+      Проверить критерий затвердевания: T ≤ T̃\_m + λ·s\_ij + η·δ
+    \item
+      Если условие выполнено:
+
+      \begin{itemize}
+      \tightlist
+      \item
+        phase{[}i{]}{[}j{]} = 1 (переход в твердое состояние)
+      \item
+        T{[}i{]}{[}j{]} = T{[}i{]}{[}j{]} + 1 (выделение скрытой
+        теплоты)
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{6}
+\tightlist
+\item
+  Сохранение результатов
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Запись фазового и температурного полей для визуализации
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{7}
+\item
+  Возврат к проверке условия остановки (пункт 4)
+\item
+  Конец: Завершение моделирования
+\end{enumerate}
+
+\subsection{Условие
+остановки:}\label{ux443ux441ux43bux43eux432ux438ux435-ux43eux441ux442ux430ux43dux43eux432ux43aux438}
+
+Вычисления продолжаются до тех пор, пока дендрит не достигнет границы
+расчетной области. Условие проверяется после каждого шага роста: если
+любой твердый узел находится на границе сетки, моделирование
+завершается.
+
+\section{Шаг 6: Исследование зависимости характеристик роста от
+параметров}\label{ux448ux430ux433-6-ux438ux441ux441ux43bux435ux434ux43eux432ux430ux43dux438ux435-ux437ux430ux432ux438ux441ux438ux43cux43eux441ux442ux438-ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43a-ux440ux43eux441ux442ux430-ux43eux442-ux43fux430ux440ux430ux43cux435ux442ux440ux43eux432}
+
+На шестом этапе выполняются серии расчетов для анализа влияния ключевых
+параметров на морфологию дендритов.{[}1{]}
+
+\subsection{Параметры для
+исследования:}\label{ux43fux430ux440ux430ux43cux435ux442ux440ux44b-ux434ux43bux44f-ux438ux441ux441ux43bux435ux434ux43eux432ux430ux43dux438ux44f}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2564}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2564}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.4872}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Параметр
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Диапазон
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+Исследуемый эффект
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Переохлаждение \(\tilde{T}_m\) & 0.1--0.9 & Скорость роста, плотность
+ветвления \\
+Капиллярный параметр \(\lambda\) & 0.01--0.5 & Стабилизация границы,
+радиус вершины \\
+Амплитуда шума \(\delta\) & 0--0.2 & Вторичное ветвление, симметрия \\
+Температуропроводность \(\chi\) & 0.1--0.5 & Скорость отвода тепла \\
+\end{longtable}
+
+\subsection{Анализируемые
+характеристики:}\label{ux430ux43dux430ux43bux438ux437ux438ux440ux443ux435ux43cux44bux435-ux445ux430ux440ux430ux43aux442ux435ux440ux438ux441ux442ux438ux43aux438}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Скорость роста вершины: измеряется как смещение фронта во времени
+\item
+  Радиус кривизны вершины: определяется по конфигурации твердой фазы
+\item
+  Плотность вторичных ветвей: количество ответвлений на единицу длины
+\item
+  Время достижения границы: полное время моделирования до остановки
+\end{enumerate}
+
+\subsection{Методика проведения
+исследований:}\label{ux43cux435ux442ux43eux434ux438ux43aux430-ux43fux440ux43eux432ux435ux434ux435ux43dux438ux44f-ux438ux441ux441ux43bux435ux434ux43eux432ux430ux43dux438ux439}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Зафиксировать все параметры, кроме исследуемого
+\item
+  Выполнить серию расчетов с различными значениями исследуемого
+  параметра
+\item
+  Для каждого расчета сохранить:
+\end{enumerate}
+
+\begin{itemize}
+\tightlist
+\item
+  Финальную морфологию дендрита
+\item
+  Зависимость скорости роста от времени
+\item
+  Время достижения границы
+\end{itemize}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{3}
+\tightlist
+\item
+  Построить графики зависимостей характеристик от параметров
+\end{enumerate}
+
+\section{Шаг 7: Визуализация
+результатов}\label{ux448ux430ux433-7-ux432ux438ux437ux443ux430ux43bux438ux437ux430ux446ux438ux44f-ux440ux435ux437ux443ux43bux44cux442ux430ux442ux43eux432}
+
+Седьмой этап обеспечивает графическое представление процесса роста и
+финальных результатов(рис. 1)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic1.png}
+
+}
+
+\caption{\label{fig-048}Рост дендрита}
+
+\end{figure}%
+
+\subsection{Визуализация в процессе
+моделирования:}\label{ux432ux438ux437ux443ux430ux43bux438ux437ux430ux446ux438ux44f-ux432-ux43fux440ux43eux446ux435ux441ux441ux435-ux43cux43eux434ux435ux43bux438ux440ux43eux432ux430ux43dux438ux44f}
+
+На каждом шаге роста (или с заданной периодичностью) сохраняются:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Фазовое поле: отображение твердой (например, черный) и жидкой (белый)
+  фаз
+\item
+  Температурное поле: цветовая карта распределения безразмерной
+  температуры
+\end{enumerate}
+
+\subsection{Финальная
+визуализация:}\label{ux444ux438ux43dux430ux43bux44cux43dux430ux44f-ux432ux438ux437ux443ux430ux43bux438ux437ux430ux446ux438ux44f}
+
+По завершении моделирования:
+
+\begin{itemize}
+\tightlist
+\item
+  Построение финальной морфологии дендрита
+\item
+  Создание анимации процесса роста на основе сохраненных кадров
+\item
+  Построение графиков зависимостей (скорость роста от времени, влияние
+  параметров)
+\end{itemize}
+
+\chapter{Вывод}\label{ux432ux44bux432ux43eux434}
+
+На втором этапе группового проекта описан алгоритм из 7 шагов для
+моделирования роста дендритов в переохлажденном расплаве. Граничные
+условия задаются постоянной температурой, равной начальной температуре
+расплава.
+
+\chapter*{Список
+литературы}\label{ux441ux43fux438ux441ux43eux43a-ux43bux438ux442ux435ux440ux430ux442ux443ux440ux44b}
+\addcontentsline{toc}{chapter}{Список литературы}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  W. W. Mullins and R. F. Sekerka, \enquote{Stability of a planar
+  interface during solidification of a dilute binary alloy,} Journal of
+  Applied Physics, vol.~35, no. 2, pp.~444--451, 1964.
+\item
+  J. W. Gibbs, \enquote{On the Equilibrium of Heterogeneous Substances,}
+  Transactions of the Connecticut Academy of Arts and Sciences, vol.~3,
+  pp.~108--248, 1875--1878.
+\item
+  Y. Saito, G. Goldbeck-Wood, and H. Müller-Krumbhaar,
+  \enquote{Numerical simulation of dendritic growth,} Physical Review A,
+  vol.~38, no. 4, pp.~2148--2157, 1988.
+\item
+  Д. А. Медведев, \enquote{Моделирование физических процессов и явлений
+  на ПК,} учебное пособие
+\item
+  Wang K. и др. Dendrite growth in the recharging process of zinc--air
+  batteries {[}Электронный ресурс{]}. Journal of Materials Chemistry A,
+  2025. URL: https://pubs.rsc.org/en/
+  content/articlelanding/2015/ta/c5ta06366c/unauth.
+\end{enumerate}
+
+
+\printbibliography
+
+
+\end{document}

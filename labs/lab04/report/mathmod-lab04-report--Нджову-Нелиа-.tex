@@ -1,0 +1,801 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Отчёта по лабораторной работе 4},
+  pdfauthor={Нджову Нелиа},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Отчёта по лабораторной работе 4}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Математическое моделирование}
+\author{Нджову Нелиа}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Целью данной лабораторной работы является построение математической
+модели гармонических колебаний.
+
+\chapter{Задание}\label{ux437ux430ux434ux430ux43dux438ux435}
+
+\section{Вариант 64}\label{ux432ux430ux440ux438ux430ux43dux442-64}
+
+Постройте фазовый портрет гармонического осциллятора и решение уравнения
+гармонического осциллятора для следующих случаев
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Колебания гармонического осциллятора без затуханий и без действий
+  внешней силы \(\ddot{x} + 8.8x = 0\)
+\item
+  Колебания гармонического осциллятора c затуханием и без действий
+  внешней силы \(\ddot{x} + 8\dot{x} + 8x = 0\)
+\item
+  Колебания гармонического осциллятора c затуханием и под действием
+  внешней силы \(\ddot{x} + 8\dot{x} + 8x = 0.8\sin(8t)\)
+\end{enumerate}
+
+На интервале \(t \in [0; 88]\) (шаг 0.05) с начальными условиями
+\(x_0 = 1.8,\,y_0 = 0.8\)
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+\section{Модель гармонического
+осциллятора}\label{ux43cux43eux434ux435ux43bux44c-ux433ux430ux440ux43cux43eux43dux438ux447ux435ux441ux43aux43eux433ux43e-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440ux430}
+
+Гармонические колебания --- это колебания, при которых физическая
+величина изменяется с течением времени по гармоническому
+(синусоидальному или косинусоидальному) закону. Такие колебания являются
+частным случаем периодических колебаний и широко встречаются в различных
+физических системах: движение груза на пружине, математический маятник,
+колебания заряда в электрическом контуре и другие.
+
+\subsection{Уравнение гармонического
+осциллятора}\label{ux443ux440ux430ux432ux43dux435ux43dux438ux435-ux433ux430ux440ux43cux43eux43dux438ux447ux435ux441ux43aux43eux433ux43e-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440ux430}
+
+Линейный гармонический осциллятор описывается дифференциальным
+уравнением второго порядка:
+
+\[
+\ddot{x} + 2\gamma \dot{x} + \omega_0^2 x = 0 \tag{1}
+\]
+
+где: - \(x\) --- переменная, описывающая состояние системы (смещение
+грузика, заряд конденсатора и т.д.); - \(\gamma\) --- параметр
+затухания, характеризующий потери энергии (трение в механической
+системе, сопротивление в электрическом контуре); - \(\omega_0\) ---
+собственная частота колебаний системы; - \(t\) --- время; -
+\(\dot{x} = \frac{dx}{dt}\), \(\ddot{x} = \frac{d^2x}{dt^2}\) --- первая
+и вторая производные по времени.
+
+\subsection{Консервативный осциллятор (без
+затухания)}\label{ux43aux43eux43dux441ux435ux440ux432ux430ux442ux438ux432ux43dux44bux439-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440-ux431ux435ux437-ux437ux430ux442ux443ux445ux430ux43dux438ux44f}
+
+При отсутствии потерь энергии (\(\gamma = 0\)) уравнение (1) принимает
+вид уравнения консервативного осциллятора:
+
+\[
+\ddot{x} + \omega_0^2 x = 0 \tag{2}
+\]
+
+В этом случае энергия колебаний сохраняется во времени, амплитуда
+колебаний остается постоянной, а движение системы является
+периодическим.
+
+\subsection{Затухающие
+колебания}\label{ux437ux430ux442ux443ux445ux430ux44eux449ux438ux435-ux43aux43eux43bux435ux431ux430ux43dux438ux44f}
+
+При наличии затухания (\(\gamma > 0\)) амплитуда колебаний постепенно
+уменьшается. В зависимости от соотношения между \(\gamma\) и
+\(\omega_0\) возможны три режима:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Слабое затухание} (\(\gamma < \omega_0\)): система совершает
+  затухающие колебания;
+\item
+  \textbf{Критическое затухание} (\(\gamma = \omega_0\)): система
+  возвращается в положение равновесия за минимальное время без
+  колебаний;
+\item
+  \textbf{Сильное затухание} (\(\gamma > \omega_0\)): система
+  апериодически возвращается в положение равновесия.
+\end{itemize}
+
+\subsection{Вынужденные
+колебания}\label{ux432ux44bux43dux443ux436ux434ux435ux43dux43dux44bux435-ux43aux43eux43bux435ux431ux430ux43dux438ux44f}
+
+Если на систему действует внешняя периодическая сила, уравнение движения
+принимает вид:
+
+\[
+\ddot{x} + 2\gamma \dot{x} + \omega_0^2 x = F(t) \tag{3}
+\]
+
+где \(F(t)\) --- внешняя сила. В данной лабораторной работе
+рассматривается гармоническая внешняя сила вида:
+
+\[
+F(t) = A \sin(\omega t) \quad \text{или} \quad F(t) = A \cos(\omega t)
+\]
+
+При действии внешней силы система совершает вынужденные колебания. После
+затухания переходного процесса устанавливаются стационарные колебания с
+частотой внешней силы \(\omega\).
+
+\subsection{Переход от уравнения второго порядка к системе первого
+порядка}\label{ux43fux435ux440ux435ux445ux43eux434-ux43eux442-ux443ux440ux430ux432ux43dux435ux43dux438ux44f-ux432ux442ux43eux440ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux430-ux43a-ux441ux438ux441ux442ux435ux43cux435-ux43fux435ux440ux432ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux430}
+
+Для анализа фазового пространства уравнение второго порядка (2) можно
+преобразовать в систему двух уравнений первого порядка. Введем новую
+переменную \(y = \dot{x}\). Тогда:
+
+\[
+\begin{cases}
+\dot{x} = y \\
+\dot{y} = -\omega_0^2 x
+\end{cases} \tag{4}
+\]
+
+Начальные условия при этом принимают вид:
+
+\[
+\begin{cases}
+x(t_0) = x_0 \\
+y(t_0) = y_0
+\end{cases} \tag{5}
+\]
+
+\subsection{Фазовое пространство и фазовый
+портрет}\label{ux444ux430ux437ux43eux432ux43eux435-ux43fux440ux43eux441ux442ux440ux430ux43dux441ux442ux432ux43e-ux438-ux444ux430ux437ux43eux432ux44bux439-ux43fux43eux440ux442ux440ux435ux442}
+
+Независимые переменные \(x\) и \(y\) определяют \textbf{фазовое
+пространство} системы. Поскольку оно двумерно, его называют
+\textbf{фазовой плоскостью}. Значения фазовых координат \(x\) и \(y\) в
+любой момент времени полностью определяют состояние системы.
+
+\textbf{Фазовая траектория} --- это гладкая кривая в фазовой плоскости,
+которая соответствует решению уравнения движения как функции времени.
+Каждая точка на фазовой траектории соответствует определенному состоянию
+системы в заданный момент времени.
+
+\textbf{Фазовый портрет} --- это совокупность фазовых траекторий,
+соответствующих различным начальным условиям, изображенных на одной
+фазовой плоскости. Фазовый портрет позволяет наглядно представить
+качественное поведение системы.
+
+Для гармонического осциллятора без затухания фазовые траектории
+представляют собой замкнутые кривые (эллипсы), что указывает на
+периодический характер колебаний. При наличии затухания фазовые
+траектории представляют собой спирали, сходящиеся к началу координат
+(положению равновесия).
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Реализация в Julia и
+Scilab}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux432-julia-ux438-scilab}
+
+Я устанавливаю параметры и определяю функцию для решения модели
+линейного гармонического осциллятора и функцию для случаев однородного
+уравнения и неоднородного уравнения отдельно в julia(рис.1)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic13.png}
+
+}
+
+\caption{\label{fig-001}Функции в julia}
+
+\end{figure}%
+
+Я использую функцию SecondOrderODEProblem для определения проблемы и
+численный метод DPKN6() для ее решения(рис.2)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic14.png}
+
+}
+
+\caption{\label{fig-002}Решение Функции}
+
+\end{figure}%
+
+После этого я визуализирую(рис.3)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic15.png}
+
+}
+
+\caption{\label{fig-003}Визуализация}
+
+\end{figure}%
+
+Я создаю такую же модель с помощью scilab
+
+\begin{verbatim}
+// Параметры
+w1 = 8.8;
+g1 = 0;
+
+w2 = 8.0;
+g2 = 8.0;
+
+// Начальные условия
+x0 = [1.8; 0.8];
+
+// Время: t ∈ [0; 88] с шагом 0.05
+t0 = 0;
+t = [0:0.05:88];
+
+// Внешняя сила
+function f = force(t)
+    f = 0.8 * sin(8.0 * t);
+endfunction
+
+// Функция для уравнений без внешней силы
+function dx = harm_osc(t, x)
+    dx(1) = x(2);
+    dx(2) = -w * x(1) - g * x(2);
+endfunction
+
+// Функция для уравнений с внешней силой
+function dx = forced_harm_osc(t, x)
+    dx(1) = x(2);
+    dx(2) = -w * x(1) - g * x(2) + force(t);
+endfunction
+
+// Случай 1: без затухания и без внешней силы
+w = w1;
+g = g1;
+
+x = ode(x0, t0, t, harm_osc);
+
+n = size(x, "c");
+for i = 1:n
+    x1_case1(i) = x(1, i);
+    x2_case1(i) = x(2, i);
+end
+
+// График колебаний
+scf(0);
+clf();
+plot(t, x1_case1, 'b-', 'LineWidth', 1.5);
+plot(t, x2_case1, 'r-', 'LineWidth', 1.5);
+xlabel('Время t');
+ylabel('');
+title('Случай 1: Колебания без затухания и внешней силы');
+legend('x (смещение)', 'x'' (скорость)');
+xgrid();
+savefig('variant64_case1_solution.png');
+
+// Фазовый портрет
+scf(1);
+clf();
+plot(x1_case1, x2_case1, 'g-', 'LineWidth', 1.5);
+xlabel('x (смещение)');
+ylabel('x'' (скорость)');
+title('Случай 1: Фазовый портрет (без затухания)');
+xgrid();
+savefig('variant64_case1_phase.png');
+
+// Случай 2: с затуханием и без внешней силы
+w = w2;
+g = g2;
+
+x = ode(x0, t0, t, harm_osc);
+
+n = size(x, "c");
+for i = 1:n
+    x1_case2(i) = x(1, i);
+    x2_case2(i) = x(2, i);
+end
+
+// График колебаний
+scf(2);
+clf();
+plot(t, x1_case2, 'b-', 'LineWidth', 1.5);
+plot(t, x2_case2, 'r-', 'LineWidth', 1.5);
+xlabel('Время t');
+ylabel('');
+title('Случай 2: Колебания с затуханием и без внешней силы');
+legend('x (смещение)', 'x'' (скорость)');
+xgrid();
+savefig('variant64_case2_solution.png');
+
+// Фазовый портрет
+scf(3);
+clf();
+plot(x1_case2, x2_case2, 'm-', 'LineWidth', 1.5);
+xlabel('x (смещение)');
+ylabel('x'' (скорость)');
+title('Случай 2: Фазовый портрет (с затуханием)');
+xgrid();
+savefig('variant64_case2_phase.png');
+
+// Случай 3: с затуханием и под действием внешней силы
+w = w3;
+g = g3;
+
+x = ode(x0, t0, t, forced_harm_osc);
+
+n = size(x, "c");
+for i = 1:n
+    x1_case3(i) = x(1, i);
+    x2_case3(i) = x(2, i);
+end
+
+// График колебаний
+scf(4);
+clf();
+plot(t, x1_case3, 'b-', 'LineWidth', 1.5);
+plot(t, x2_case3, 'r-', 'LineWidth', 1.5);
+xlabel('Время t');
+ylabel('');
+title('Случай 3: Колебания с затуханием и внешней силой F = 0.8 sin(8t)');
+legend('x (смещение)', 'x'' (скорость)');
+xgrid();
+savefig('variant64_case3_solution.png');
+
+// Фазовый портрет
+scf(5);
+clf();
+plot(x1_case3, x2_case3, 'c-', 'LineWidth', 1.5);
+xlabel('x (смещение)');
+ylabel('x'' (скорость)');
+title('Случай 3: Фазовый портрет (с затуханием и внешней силой)');
+xgrid();
+savefig('variant64_case3_phase.png');
+\end{verbatim}
+
+\section{Колебания гармонического осциллятора без затуханий и без
+действий внешней
+силы}\label{ux43aux43eux43bux435ux431ux430ux43dux438ux44f-ux433ux430ux440ux43cux43eux43dux438ux447ux435ux441ux43aux43eux433ux43e-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440ux430-ux431ux435ux437-ux437ux430ux442ux443ux445ux430ux43dux438ux439-ux438-ux431ux435ux437-ux434ux435ux439ux441ux442ux432ux438ux439-ux432ux43dux435ux448ux43dux435ux439-ux441ux438ux43bux44b}
+
+Графики, которые я получил от julia и scilab, совпадают(рис 4 и 5)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic2.png}
+
+}
+
+\caption{\label{fig-004}Колебания в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic7.png}
+
+}
+
+\caption{\label{fig-005}Колебания в Scilab}
+
+\end{figure}%
+
+Фазовые портреты также одинаковы(рис 6 и 7)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic1.png}
+
+}
+
+\caption{\label{fig-006}Фазовые портреты в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic8.png}
+
+}
+
+\caption{\label{fig-007}Фазовые портреты в Scilab}
+
+\end{figure}%
+
+\emph{Мы видим, что генератор периодически совершает колебания, график
+не исчезает, а решение системы дифференциальных уравнений всегда
+движется по одной и той же траектории.}
+
+\section{Колебания гармонического осциллятора с затуханий и без действий
+внешней
+силы}\label{ux43aux43eux43bux435ux431ux430ux43dux438ux44f-ux433ux430ux440ux43cux43eux43dux438ux447ux435ux441ux43aux43eux433ux43e-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440ux430-ux441-ux437ux430ux442ux443ux445ux430ux43dux438ux439-ux438-ux431ux435ux437-ux434ux435ux439ux441ux442ux432ux438ux439-ux432ux43dux435ux448ux43dux435ux439-ux441ux438ux43bux44b}
+
+Графики, которые я получил от julia и scilab, совпадают(рис 8 и 9)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic4.png}
+
+}
+
+\caption{\label{fig-008}Колебания(с затуханием) в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic9.png}
+
+}
+
+\caption{\label{fig-009}Колебания(с затуханием) в Scilab}
+
+\end{figure}%
+
+Фазовые портреты также одинаковы(рис 10 и 11)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic3.png}
+
+}
+
+\caption{\label{fig-010}Фазовые портреты(с затуханием) в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic10.png}
+
+}
+
+\caption{\label{fig-011}Фазовые портреты(с затуханием) в Scilab}
+
+\end{figure}%
+
+\emph{Мы видим, что сначала осциллятор совершает колебания, а затем
+график исчезает.}
+
+\section{\texorpdfstring{Колебания гармонического осциллятора с
+затуханий и внешней силы
+\(F(t) = 0.8\sin{(8t)}\)}{Колебания гармонического осциллятора с затуханий и внешней силы F(t) = 0.8\textbackslash sin\{(8t)\}}}\label{ux43aux43eux43bux435ux431ux430ux43dux438ux44f-ux433ux430ux440ux43cux43eux43dux438ux447ux435ux441ux43aux43eux433ux43e-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440ux430-ux441-ux437ux430ux442ux443ux445ux430ux43dux438ux439-ux438-ux432ux43dux435ux448ux43dux435ux439-ux441ux438ux43bux44b-ft-0.8sin8t}
+
+Графики, которые я получил от julia и scilab, совпадают(рис 12 и 13)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic6.png}
+
+}
+
+\caption{\label{fig-012}Колебания(с затуханием и внешней силы
+\(F(t) = 0.8\sin{(8t)}\)) в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic11.png}
+
+}
+
+\caption{\label{fig-013}Колебания(с затуханием и внешней силы
+\(F(t) = 0.8\sin{(8t)}\)) в Scilab}
+
+\end{figure}%
+
+Фазовые портреты также одинаковы(рис 14 и 15)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic5.png}
+
+}
+
+\caption{\label{fig-014}Фазовые портреты(с затуханием и внешней силы
+\(F(t) = 0.8\sin{(8t)}\)) в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic12.png}
+
+}
+
+\caption{\label{fig-015}Фазовые портреты(с затуханием и внешней силы
+\(F(t) = 0.8\sin{(8t)}\)) в Scilab}
+
+\end{figure}%
+
+\emph{Мы видим, что система приходит в состояние равновесия, период
+колебаний больше, чем в первом случае, так как затухание замедляет его,
+мы также видим, что под воздействием внешней силы колебания
+продолжаются, но их амплитуда меньше.}
+
+\section{Ответы на
+вопросы}\label{ux43eux442ux432ux435ux442ux44b-ux43dux430-ux432ux43eux43fux440ux43eux441ux44b}
+
+\subsection{1. Запишите простейшую модель гармонических
+колебаний}\label{ux437ux430ux43fux438ux448ux438ux442ux435-ux43fux440ux43eux441ux442ux435ux439ux448ux443ux44e-ux43cux43eux434ux435ux43bux44c-ux433ux430ux440ux43cux43eux43dux438ux447ux435ux441ux43aux438ux445-ux43aux43eux43bux435ux431ux430ux43dux438ux439}
+
+Простейшая модель гармонических колебаний описывается уравнением
+консервативного осциллятора:
+
+\[
+\ddot{x} + \omega_0^2 x = 0
+\]
+
+Где x переменная состояния, \(\omega_0\) собственная частота колебаний
+
+\subsection{2. Дайте определение
+осциллятора}\label{ux434ux430ux439ux442ux435-ux43eux43fux440ux435ux434ux435ux43bux435ux43dux438ux435-ux43eux441ux446ux438ux43bux43bux44fux442ux43eux440ux430}
+
+Осциллятор --- это система, которая совершает колебания, то есть
+периодически изменяет свое состояние вблизи положения равновесия. В
+общем случае поведение осциллятора описывается дифференциальным
+уравнением второго порядка:
+
+\[
+\ddot{x} + 2\gamma \dot{x} + \omega_0^2 x = 0
+\]
+
+\subsection{3. Запишите модель математического
+маятника}\label{ux437ux430ux43fux438ux448ux438ux442ux435-ux43cux43eux434ux435ux43bux44c-ux43cux430ux442ux435ux43cux430ux442ux438ux447ux435ux441ux43aux43eux433ux43e-ux43cux430ux44fux442ux43dux438ux43aux430}
+
+Для малых углов отклонения (\(\theta \ll 1\)) модель математического
+маятника записывается как:
+
+\[
+\ddot{\theta} + \frac{g}{l} \theta = 0
+\]
+
+где \(\theta\) --- угловое отклонение от вертикали, \(g\) --- ускорение
+свободного падения, \(l\) --- длина подвеса. В стандартной форме
+гармонического осциллятора:
+
+\[
+\ddot{\theta} + \omega_0^2 \theta = 0, \quad \omega_0 = \sqrt{\frac{g}{l}}
+\]
+
+\subsection{4. Запишите алгоритм перехода от дифференциального уравнения
+второго порядка к двум дифференциальным уравнениям первого
+порядка}\label{ux437ux430ux43fux438ux448ux438ux442ux435-ux430ux43bux433ux43eux440ux438ux442ux43c-ux43fux435ux440ux435ux445ux43eux434ux430-ux43eux442-ux434ux438ux444ux444ux435ux440ux435ux43dux446ux438ux430ux43bux44cux43dux43eux433ux43e-ux443ux440ux430ux432ux43dux435ux43dux438ux44f-ux432ux442ux43eux440ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux430-ux43a-ux434ux432ux443ux43c-ux434ux438ux444ux444ux435ux440ux435ux43dux446ux438ux430ux43bux44cux43dux44bux43c-ux443ux440ux430ux432ux43dux435ux43dux438ux44fux43c-ux43fux435ux440ux432ux43eux433ux43e-ux43fux43eux440ux44fux434ux43aux430}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Ввести новую переменную \(y = \dot{x}\) (первая производная исходной
+  переменной)
+\item
+  Выразить \(\dot{y} = \ddot{x}\) из исходного уравнения
+\item
+  Записать систему двух уравнений первого порядка:
+
+  \[
+  \begin{cases}
+  \dot{x} = y \\
+  \dot{y} = -\omega_0^2 x - 2\gamma y + F(t)
+  \end{cases}
+  \]
+\end{enumerate}
+
+\subsection{5. Что такое фазовый портрет и фазовая
+траектория?}\label{ux447ux442ux43e-ux442ux430ux43aux43eux435-ux444ux430ux437ux43eux432ux44bux439-ux43fux43eux440ux442ux440ux435ux442-ux438-ux444ux430ux437ux43eux432ux430ux44f-ux442ux440ux430ux435ux43aux442ux43eux440ux438ux44f}
+
+\textbf{Фазовая траектория} --- это кривая в фазовом пространстве
+(плоскости), описывающая изменение состояния системы во времени. Каждая
+точка на траектории соответствует определенному состоянию системы.
+
+\textbf{Фазовый портрет} --- это совокупность фазовых траекторий,
+соответствующих различным начальным условиям, построенных на одной
+фазовой плоскости. Фазовый портрет позволяет качественно анализировать
+поведение системы и определять типы движений.
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+Выполнив эту лабораторную работу я построила математическую модель
+гармонического осциллятора и провелила анализ s
+
+
+\printbibliography
+
+
+\end{document}

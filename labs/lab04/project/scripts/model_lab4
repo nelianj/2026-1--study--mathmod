@@ -1,0 +1,132 @@
+// Параметры
+w1 = 8.8;
+g1 = 0;
+
+w2 = 8.0;
+g2 = 8.0;
+
+// Начальные условия
+x0 = [1.8; 0.8];
+
+// Время: t ∈ [0; 88] с шагом 0.05
+t0 = 0;
+t = [0:0.05:88];
+
+// Внешняя сила
+function f = force(t)
+    f = 0.8 * sin(8.0 * t);
+endfunction
+
+// Функция для уравнений без внешней силы
+function dx = harm_osc(t, x)
+    dx(1) = x(2);
+    dx(2) = -w * x(1) - g * x(2);
+endfunction
+
+// Функция для уравнений с внешней силой
+function dx = forced_harm_osc(t, x)
+    dx(1) = x(2);
+    dx(2) = -w * x(1) - g * x(2) + force(t);
+endfunction
+
+// Случай 1: без затухания и без внешней силы
+w = w1;
+g = g1;
+
+x = ode(x0, t0, t, harm_osc);
+
+n = size(x, "c");
+for i = 1:n
+    x1_case1(i) = x(1, i);
+    x2_case1(i) = x(2, i);
+end
+
+// График колебаний
+scf(0);
+clf();
+plot(t, x1_case1, 'b-', 'LineWidth', 1.5);
+plot(t, x2_case1, 'r-', 'LineWidth', 1.5);
+xlabel('Время t');
+ylabel('');
+title('Случай 1: Колебания без затухания и внешней силы');
+legend('x (смещение)', 'x'' (скорость)');
+xgrid();
+savefig('variant64_case1_solution.png');
+
+// Фазовый портрет
+scf(1);
+clf();
+plot(x1_case1, x2_case1, 'g-', 'LineWidth', 1.5);
+xlabel('x (смещение)');
+ylabel('x'' (скорость)');
+title('Случай 1: Фазовый портрет (без затухания)');
+xgrid();
+savefig('variant64_case1_phase.png');
+
+// Случай 2: с затуханием и без внешней силы
+w = w2;
+g = g2;
+
+x = ode(x0, t0, t, harm_osc);
+
+n = size(x, "c");
+for i = 1:n
+    x1_case2(i) = x(1, i);
+    x2_case2(i) = x(2, i);
+end
+
+// График колебаний
+scf(2);
+clf();
+plot(t, x1_case2, 'b-', 'LineWidth', 1.5);
+plot(t, x2_case2, 'r-', 'LineWidth', 1.5);
+xlabel('Время t');
+ylabel('');
+title('Случай 2: Колебания с затуханием и без внешней силы');
+legend('x (смещение)', 'x'' (скорость)');
+xgrid();
+savefig('variant64_case2_solution.png');
+
+// Фазовый портрет
+scf(3);
+clf();
+plot(x1_case2, x2_case2, 'm-', 'LineWidth', 1.5);
+xlabel('x (смещение)');
+ylabel('x'' (скорость)');
+title('Случай 2: Фазовый портрет (с затуханием)');
+xgrid();
+savefig('variant64_case2_phase.png');
+
+// Случай 3: с затуханием и под действием внешней силы
+w = w3;
+g = g3;
+
+x = ode(x0, t0, t, forced_harm_osc);
+
+n = size(x, "c");
+for i = 1:n
+    x1_case3(i) = x(1, i);
+    x2_case3(i) = x(2, i);
+end
+
+// График колебаний
+scf(4);
+clf();
+plot(t, x1_case3, 'b-', 'LineWidth', 1.5);
+plot(t, x2_case3, 'r-', 'LineWidth', 1.5);
+xlabel('Время t');
+ylabel('');
+title('Случай 3: Колебания с затуханием и внешней силой F = 0.8 sin(8t)');
+legend('x (смещение)', 'x'' (скорость)');
+xgrid();
+savefig('variant64_case3_solution.png');
+
+// Фазовый портрет
+scf(5);
+clf();
+plot(x1_case3, x2_case3, 'c-', 'LineWidth', 1.5);
+xlabel('x (смещение)');
+ylabel('x'' (скорость)');
+title('Случай 3: Фазовый портрет (с затуханием и внешней силой)');
+xgrid();
+savefig('variant64_case3_phase.png');
