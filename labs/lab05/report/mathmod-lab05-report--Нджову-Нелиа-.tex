@@ -1,0 +1,567 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Отчёта по лабораторной работе 5},
+  pdfauthor={Нджову Нелиа},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Отчёта по лабораторной работе 5}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Математическое моделирование}
+\author{Нджову Нелиа}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Целью данной лабораторной работы является построение математической
+модели хищник-жертва.
+
+\chapter{Задание}\label{ux437ux430ux434ux430ux43dux438ux435}
+
+\section{Вариант 64}\label{ux432ux430ux440ux438ux430ux43dux442-64}
+
+Для модели «хищник-жертва»:
+
+\[
+\begin{cases}
+\frac{dx}{dt} = -0.48x(t) + 0.031x(t)y(t)\\
+\frac{dy}{dt} = 0.68y(t) - 0.031x(t)y(t)
+\end{cases}
+\](2.1)
+
+Постройте график зависимости численности хищников от численности жертв,
+а также графики изменения численности хищников и численности жертв при
+следующих начальных условиях: \(x_0 = 3\), \(y_0 = 18\). Найдите
+стационарное состояние системы.
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+Простейшая модель взаимодействия двух видов типа «хищник --- жертва»
+модель Лотки-Вольтерры. Данная двувидовая модель основывается на
+следующих предположениях:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Численность популяции жертв x и хищников y зависят только от времени
+  (модель не учитывает пространственное распределение популяции на
+  занимаемой территории)
+\item
+  В отсутствии взаимодействия численность видов изменяется по модели
+  Мальтуса, при этом число жертв увеличивается, а число хищников падает
+\item
+  Естественная смертность жертвы и естественная рождаемость хищника
+  считаются несущественными
+\item
+  Эффект насыщения численности обеих популяций не учитывается
+\item
+  Скорость роста численности жертв уменьшается пропорционально
+  численности хищников
+\end{enumerate}
+
+\[
+\begin{cases}
+\frac{dx}{dt} = ax(t) - bx(t)y(t)\\
+\frac{dy}{dt} = -cy(t) + dx(t)y(t)
+\end{cases}
+\](3.1)
+
+В этой модели x -- число жертв, y - число хищников. Коэффициент a
+описывает скорость естественного прироста числа жертв в отсутствие
+хищников, с естественное вымирание хищников, лишенных пищи в виде жертв.
+Вероятность взаимодействия жертвы и хищника считается пропорциональной
+как количеству жертв, так и числу самих хищников (xy). Каждый акт
+взаимодействия уменьшает популяцию жертв, но способствует увеличению
+популяции хищников (члены -bxy и dxy в правой части уравнения)
+
+Найдём стационарное состояние системы (3.1). Для этого приравняем её
+правые части к нулю
+
+\[
+\begin{cases}
+ax(t)-bx(t)y(t) = 0\\
+-cy(t)+dx(t)y(t) = 0
+\end{cases}
+\](3.2)
+
+Из полученной системы (3.2) получаем, что стационарное состояние системы
+будет в точке \(x_0 = c/d\), \(y_0 = a/b\). Если начальные значения
+задать в стационарном состоянии \(x(0) = x_0\), \(y(0) = y_0\), то в
+любой момент времени численность популяций изменяться не будет. При
+малом отклонении от положения равновесия численности как хищника, так и
+жертвы с течением времени не возвращаются к равновесным значениям, а
+совершают периодические колебания вокруг стационарной точки.
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Поиск стационарного состояния
+системы}\label{ux43fux43eux438ux441ux43a-ux441ux442ux430ux446ux438ux43eux43dux430ux440ux43dux43eux433ux43e-ux441ux43eux441ux442ux43eux44fux43dux438ux44f-ux441ux438ux441ux442ux435ux43cux44b}
+
+Найдём стационарное состояние системы (2.1). Для этого приравняем её
+правые части к нулю
+
+\[
+\begin{cases}
+  -0.48x(t)+0.031x(t)y(t) = 0\\
+  0.68y(t)- 0.031x(t)y(t) = 0
+\end{cases}
+\](4.1)
+
+\[
+\begin{cases}
+  -0.48 + 0.031y(t) = 0\\
+  0.68 - 0.031x(t) = 0
+\end{cases}
+\](4.2)
+
+Из полученной системы получаем, что стационарное состояние системы будет
+в точке \(x_0 = 0.68/0.031 = 21.9355\), \(y_0 = 0.48/0.031 = 15.4839\).
+Если начальные значения задать в стационарном состоянии \(x(0) = x_0\),
+\(y(0) = y_0\), то в любой момент времени численность популяций
+изменяться не будет. При малом отклонении от положения равновесия
+численности как хищника, так и жертвы с течением времени не возвращаются
+к равновесным значениям, а совершают периодические колебания вокруг
+стационарной точки.
+
+\section{Реализация в
+Julia}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux432-julia}
+
+Зададим начальные значения функций и параметры, а также интервал
+интегрирования(рис.1)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic10.png}
+
+}
+
+\caption{\label{fig-001}Реализация в Julia}
+
+\end{figure}%
+
+Зададим функцию для решения модели хищник-жертва. Для задания проблемы
+используется функция \texttt{ODEProblem}, а для решения -- численный
+метод \texttt{Tsit5()}(рис.2)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic11.png}
+
+}
+
+\caption{\label{fig-002}Реализация в Julia}
+
+\end{figure}%
+
+С помощью \texttt{plot} строим графики решения модели, а также фазовый
+портрет (рис.3, 4 и 5)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic12.png}
+
+}
+
+\caption{\label{fig-003}Реализация в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic2.png}
+
+}
+
+\caption{Решение модели при \(x_0 = 3, \, y_0=18\). Julia}
+
+\end{figure}%
+
+\includegraphics{image/pic3.png}\{\#fig:005width=70\%\}
+
+Проверим найденное стационарное состояние с помощью вычислений в
+программе, для этого используем деление соответствующих параметров и
+получим \texttt{x\_c}, \texttt{y\_c}. Если это стационарное состояние
+системы,то на графике решения мы не увидим изменения функций, а на
+фазовом портрете получим одну точку. Поэтому зададим проблему со
+стационарным состоянием в виде начального условия и решим ее(рис.6 и 7)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic13.png}
+
+}
+
+\caption{\label{fig-006}Реализация в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic1.png}
+
+}
+
+\caption{\label{fig-007}стационарной точки}
+
+\end{figure}%
+
+С помощью \texttt{plot} построим графики решения и фазовый портрет
+(рис.8, 9 и 10)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic14.png}
+
+}
+
+\caption{\label{fig-008}Реализация в Julia}
+
+\end{figure}%
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic4.png}
+
+}
+
+\caption{Решение модели при \(x_0 = x_c, \, y_0=y_c\). Julia}
+
+\end{figure}%%
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic5.png}
+
+}
+
+\caption{Фазовый портрет модели при \(x_0 = x_c, \, y_0=y_c\). Julia}
+
+\end{figure}%
+
+Видим, что значения решений остаются неизменными, значит, мы верно
+определили стационарное состояние системы.
+
+\section{Реализация в
+OpenModelica}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux432-openmodelica}
+
+Сначала зададим модель с данными в условиях варианта начальными
+значениями.
+
+\begin{verbatim}
+// Параметры
+a = 0.48;
+b = 0.031;
+c = 0.68;
+d = 0.031;
+
+// Система ДУ
+function dx = syst2(t, x)
+    dx(1) = -a*x(1) + b*x(1)*x(2);
+    dx(2) = c*x(2) - d*x(1)*x(2);
+endfunction
+
+// Начальные условия
+t0 = 0;
+x0 = [3; 18];
+t = [0:0.1:50];
+
+// Решение
+y = ode(x0, t0, t, syst2);
+
+y1 = y(1, :);
+y2 = y(2, :);
+
+// ГРАФИК
+scf(0);
+clf();
+plot(t, y1, 'b-', 'LineWidth', 2);
+plot(t, y2, 'r--', 'LineWidth', 2);
+xlabel('Время');
+ylabel('Численность популяции');
+title('Модель хищник-жертва (x_0=3, y_0=18)');
+legend('Жертвы', 'Хищники');
+xgrid();
+savefig('lab5_2.png');
+
+scf(1);
+clf();
+plot(y1, y2, 'k-', 'LineWidth', 2);
+xlabel('x, жертвы');
+ylabel('y, хищники');
+title('Фазовый портрет');
+xgrid();
+savefig('lab5_2.1.png');
+\end{verbatim}
+
+После установки симуляции получим следующие графики решения модели и
+фазового портрета (рис.11 и 12)
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic6.png}
+
+}
+
+\caption{Решение модели при \(x_0 = 3, \, y_0=18\). OpenModelica}
+
+\end{figure}%%
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic7.png}
+
+}
+
+\caption{Фазовый портрет модели при \(x_0 = 3, \, y_0=18\).
+OpenModelica}
+
+\end{figure}%
+
+Далее поменяем начальное значение на стационарное состояние системы:
+
+\begin{verbatim}
+// Стационарная точка
+x_c = c / d;   // 0.68 / 0.031 ≈ 21.9355
+y_c = a / b;   // 0.48 / 0.031 ≈ 15.4839
+
+// Решение со стационарными начальными условиями
+x0_stat = [x_c; y_c];
+y_stat = ode(x0_stat, t0, t, syst2);
+
+y1_stat = y_stat(1, :);
+y2_stat = y_stat(2, :);
+
+// ГРАФИК
+scf(2);
+clf();
+plot(t, y1_stat, 'b-', 'LineWidth', 2);
+plot(t, y2_stat, 'r--', 'LineWidth', 2);
+xlabel('Время');
+ylabel('Численность популяции');
+title('Стационарное состояние: x0 = x_c, y0 = y_c');
+legend('Жертвы', 'Хищники');
+xgrid();
+savefig('lab5_2.2.png');
+
+scf(3);
+clf();
+plot(y1_stat, y2_stat, 'ko', 'MarkerSize', 10, 'MarkerFaceColor', 'k');
+xlabel('x, жертвы');
+ylabel('y, хищники');
+title('Фазовый портрет (стационарная точка)');
+xgrid();
+savefig('lab5_2.3.png');
+\end{verbatim}
+
+После установки симуляции получим следующие графики решения модели и
+фазового портрета (рис.13 и 14)
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic8.png}
+
+}
+
+\caption{Решение модели при \(x_0 = x_c, \, y_0=y_c\). OpenModelica}
+
+\end{figure}%%
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\textwidth,height=\textheight]{image/pic9.png}
+
+}
+
+\caption{Фазовый портрет модели при \(x_0 = x_c, \, y_0=y_c\).
+OpenModelica}
+
+\end{figure}%
+
+Графики, полученнные в OpenModelica идентичны графикам в Julia.
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+Выполнив эту лабораторную работу, я построила математическую модель
+хищник жертва и провели анализ.
+
+
+\printbibliography
+
+
+\end{document}
