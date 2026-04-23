@@ -1,0 +1,460 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  12pt,
+  a4paper,
+  DIV=11,
+  numbers=noendperiod]{scrreprt}
+
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{indentfirst}
+\usepackage{float}
+\floatplacement{figure}{H}
+\IfFileExists{plex-otf.sty}{
+  %% Full TeXlive
+  \usepackage[
+    % math,
+    RM={Scale=0.94},SS={Scale=0.94},SScon={Scale=0.94},TT={Scale=MatchLowercase,FakeStretch=0.9},
+    DefaultFeatures={Ligatures=Common}
+  ]{plex-otf}
+  % \usepackage[Scale=MatchUppercase]{juliamono}
+}{
+  %% TinyTeX
+  \usepackage{libertine}
+}
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Содержание}
+\else
+  \newcommand\contentsname{Содержание}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Список иллюстраций}
+\else
+  \newcommand\listfigurename{Список иллюстраций}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Список таблиц}
+\else
+  \newcommand\listtablename{Список таблиц}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Рисунок}
+\else
+  \newcommand\figurename{Рисунок}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Таблица}
+\else
+  \newcommand\tablename{Таблица}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Список}
+\newcommand*\listoflistings{\listof{codelisting}{Листинги}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{russian}
+\babelprovide[import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage[style=gost-numeric,backend=biber,langhook=extras,autolang=other*]{biblatex}
+\addbibresource{bib/cite.bib}
+\usepackage{csquotes}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Отчёта по лабораторной работе 6},
+  pdfauthor={Нджову Нелиа},
+  pdflang={ru-RU},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Отчёта по лабораторной работе 6}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Математическое моделирование}
+\author{Нджову Нелиа}
+\date{}
+
+\begin{document}
+\maketitle
+
+\renewcommand*\contentsname{Содержание}
+{
+\setcounter{tocdepth}{1}
+\tableofcontents
+}
+\listoffigures
+\listoftables
+\setstretch{1.5}
+\chapter{Цель
+работы}\label{ux446ux435ux43bux44c-ux440ux430ux431ux43eux442ux44b}
+
+Целью данной лабораторной работы является построение математической
+модели Эпидемии.
+
+\chapter{Задание}\label{ux437ux430ux434ux430ux43dux438ux435}
+
+\emph{Вариант 64}
+
+На одном острове вспыхнула эпидемия. Известно, что из всех проживающих
+на острове (N=14 987) в момент начала эпидемии (t=0) число заболевших
+людей (являющихся распространителями инфекции) I(0)=187, А число
+здоровых людей с иммунитетом к болезни R(0)=68. Таким образом, число
+людей восприимчивых к болезни, но пока здоровых, в начальный момент
+времени S(0)=N-I(0)- R(0).
+
+Постройте графики изменения числа особей в каждой из трех групп.
+Рассмотрите, как будет протекать эпидемия в случае:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi})}
+\item
+  если \(I(0) \leq I^*\)
+\item
+  если \(I(0) > I^*\)
+\end{enumerate}
+
+\chapter{Теоретическое
+введение}\label{ux442ux435ux43eux440ux435ux442ux438ux447ux435ux441ux43aux43eux435-ux432ux432ux435ux434ux435ux43dux438ux435}
+
+Рассмотрим простейшую модель эпидемии. Предположим, что некая популяция,
+состоящая из N особей, (считаем, что популяция изолирована)
+подразделяется на три группы. Первая группа - это восприимчивые к
+болезни, но пока здоровые особи, обозначим их через S(t). Вторая группа
+-- это число инфицированных особей, которые также при этом являются
+распространителями инфекции, обозначим их I(t). А третья группа,
+обозначающаяся через R(t) -- это здоровые особи с иммунитетом к болезни.
+
+До того, как число заболевших не превышает критического значения
+I\emph{, считаем, что все больные изолированы и не заражают здоровых.
+Когда} \(I(0) > I^*\), тогда инфицирование способны заражать
+восприимчивых к болезни особей.
+
+Таким образом, скорость изменения числа S(t) меняется по следующему
+закону:
+
+\[
+\frac{dS}{dt} = 
+\begin{cases}
+-\alpha S, & \text{если } I(t) > I^* \\
+0, & \text{если } I(t) \leq I^*
+\end{cases}
+\]
+
+Поскольку каждая восприимчивая к болезни особь, которая, в конце концов,
+заболевает, сама становится инфекционной, то скорость изменения числа
+инфекционных особей представляет разность за единицу времени между
+заразившимися и теми, кто уже болеет и лечится, т.е.:
+
+\[
+\frac{dI}{dt} = 
+\begin{cases}
+\alpha S - \beta I, & \text{если } I(t) > I^* \\
+-\beta I, & \text{если } I(t) \leq I^*
+\end{cases}
+\]
+
+А скорость изменения выздоравливающих особей (при этом приобретающие
+иммунитет к болезни)
+
+\[
+\frac{dR}{dt} = \beta I
+\]
+
+Постоянные пропорциональности, \(\alpha, \beta\) - это коэффициенты
+заболеваемости и выздоровления соответственно.
+
+Для того, чтобы решения соответствующих уравнений определялось
+однозначно, необходимо задать начальные условия .Считаем, что на начало
+эпидемии в момент времени t = 0 нет особей с иммунитетом к болезни
+R(0)=0, а число инфицированных и восприимчивых к болезни особей I(0) и
+S(0) соответственно. Для анализа картины протекания эпидемии необходимо
+рассмотреть два случая: \(I(0) \leq I^*\) и \(I(0) > I^*\)
+
+\chapter{Выполнение лабораторной
+работы}\label{ux432ux44bux43fux43eux43bux43dux435ux43dux438ux435-ux43bux430ux431ux43eux440ux430ux442ux43eux440ux43dux43eux439-ux440ux430ux431ux43eux442ux44b}
+
+\section{Реализация в
+Julia}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux432-julia}
+
+Зададим начальные значения, время интегрирования и параметры
+модели(рис.1).
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic5.png}
+
+}
+
+\caption{\label{fig-001}Реализация в Julia}
+
+\end{figure}%
+
+\subsection{\texorpdfstring{1. если
+\(I(0) \leq I^*\)}{1. если I(0) \textbackslash leq I\^{}*}}\label{ux435ux441ux43bux438-i0-leq-i}
+
+Рассмотрим случай 1, когда количество заболевших не превышает
+критического значения I*, то есть мы предполагаем, что все больные
+изолированы и не заражают здоровых людей. Определим функцию для нашего
+случая с помощью формул, а также зададим задачу Коши с помощью
+ODEProblem, решать мы ее будем с помощью solve. Для построения графика
+используем plot(рис.2)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic6.png}
+
+}
+
+\caption{\label{fig-002}Реализация в Julia(случае 1)}
+
+\end{figure}%
+
+Из графика видно, что число уязвимых здоровых людей не увеличивается,
+потому что все больные изолированы и не могут заразить других. Больные в
+конечном итоге выздоравливают или умирают, поэтому число инфицированных
+уменьшается, а число выздоровевших увеличивается(рис.3)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic1.png}
+
+}
+
+\caption{\label{fig-003}Реализация в Julia(случае 1)}
+
+\end{figure}%
+
+\subsection{\texorpdfstring{2. если
+\(I(0) > I^*\)}{2. если I(0) \textgreater{} I\^{}*}}\label{ux435ux441ux43bux438-i0-i}
+
+Давайте рассмотрим случай 2, когда число случаев превышает критическое
+значение I*, то есть мы считаем, что инфицированные люди все еще
+находятся в контакте с восприимчивыми лицами, следовательно, они
+способны заразить их. В этом случае мы также зададим задачу Коши,
+используя ODEProblem, и решим ее с помощью solve. Мы используем plot для
+построения графика(рис.4)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic7.png}
+
+}
+
+\caption{\label{fig-004}Реализация в Julia(случае 2)}
+
+\end{figure}%
+
+На графике мы видим, что число восприимчивых людей уменьшается, пока не
+достигнет предела, это происходит потому, что заражаются все. Сначала
+число больных увеличивается, но со временем, когда люди выздоравливают
+или умирают, оно начинает уменьшаться, что приводит к увеличению числа
+выздоровевших(рис.5)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic2.png}
+
+}
+
+\caption{\label{fig-005}Реализация в Julia(случае 2)}
+
+\end{figure}%
+
+\section{Реализация в
+Scilab}\label{ux440ux435ux430ux43bux438ux437ux430ux446ux438ux44f-ux432-scilab}
+
+Я реализую варианты 1 и 2 с помощью scilab
+
+'\,'\,' alpha = 0.5; beta = 0.1;
+
+N = 14987; I0\_case1 = 187; R0 = 68; S0\_case1 = N - I0\_case1 - R0;
+
+I\_star = 200; t0 = 0; t = 0:0.1:50;
+
+//I(0) \textless= I*
+
+function dx = epidemic\_isolated(t, x) // x(1) = S(t) - восприимчивые к
+болезни // x(2) = I(t) - инфицированные // x(3) = R(t) - здоровые с
+иммунитетом dx(1) = 0; dx(2) = -beta * x(2); dx(3) = beta * x(2);
+endfunction
+
+x0\_case1 = {[}S0\_case1; I0\_case1; R0{]};
+
+y\_case1 = ode(x0\_case1, t0, t, epidemic\_isolated);
+
+scf(1); plot(t, y\_case1(1,:), \enquote*{b-}, \enquote*{LineWidth}, 2);
+// S(t) - синий plot(t, y\_case1(2,:), \enquote*{r-},
+\enquote*{LineWidth}, 2); // I(t) - красный plot(t, y\_case1(3,:),
+\enquote*{g-}, \enquote*{LineWidth}, 2); // R(t) - зелёный
+
+xlabel(\enquote*{Время (t)}); ylabel(\enquote*{Численность особей});
+title({[}\enquote*{Случай 1: I(0) =} + string(I0\_case1) + ' \textless=
+I* = ' + string(I\_star) + ' (Больные изолированы)'{]});
+legend({[}\enquote*{S(t) - Восприимчивые}; \enquote*{I(t) -
+Инфицированные}; \enquote*{R(t) - Выздоровевшие}{]}, \enquote*{box});
+xgrid();
+
+// Сохранение графика xs2png(0, \enquote*{epidemic\_case1\_scilab.png});
+
+// СЛУЧАЙ 2: I(0) \textgreater{} I*
+
+I0\_case2 = 250; // Это \textgreater{} I\_star = 200 S0\_case2 = N -
+I0\_case2 - R0; // = 14987 - 250 - 68 = 14669
+
+function dx = epidemic\_full(t, x) dx(1) = -alpha * x(1); dx(2) = alpha
+* x(1) - beta * x(2); dx(3) = beta * x(2); endfunction
+
+x0\_case2 = {[}S0\_case2; I0\_case2; R0{]}; y\_case2 = ode(x0\_case2,
+t0, t, epidemic\_full);
+
+// Построение графика scf(2); plot(t, y\_case2(1,:), \enquote*{b-},
+\enquote*{LineWidth}, 2); plot(t, y\_case2(2,:), \enquote*{r-},
+\enquote*{LineWidth}, 2); plot(t, y\_case2(3,:), \enquote*{g-},
+\enquote*{LineWidth}, 2); xlabel(\enquote*{Время (t)});
+ylabel(\enquote*{Численность особей}); title({[}\enquote*{Случай 2: I(0)
+=} + string(I0\_case2) + ' \textgreater{} I* = ' + string(I\_star) + '
+(Эпидемия)'{]}); legend({[}\enquote*{S(t) - Восприимчивые};
+\enquote*{I(t) - Инфицированные}; \enquote*{R(t) - Выздоровевшие}{]},
+\enquote*{box}); xgrid();
+
+// Сохранение графика xs2png(0, \enquote*{epidemic\_case2\_scilab.png});
+
+'\,'\,'
+
+Мы видим, что графики, которые мы получаем как в случае 1, так и в
+случае 2, аналогичны тем, которые мы получили при использовании
+julia(рис 6 и 7)
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic3.png}
+
+}
+
+\caption{\label{fig-005}случае 1}
+
+\end{figure}%
+
+\begin{figure}
+
+\centering{
+
+\includegraphics[width=0.7\textwidth,height=\textheight]{image/pic4.png}
+
+}
+
+\caption{\label{fig-005}случае 2}
+
+\end{figure}%
+
+\chapter{Выводы}\label{ux432ux44bux432ux43eux434ux44b}
+
+В этой работе, мы построили математической модели Эпидемии
+
+
+\printbibliography
+
+
+\end{document}
