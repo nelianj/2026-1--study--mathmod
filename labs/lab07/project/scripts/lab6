@@ -1,0 +1,71 @@
+alpha = 0.5;
+beta = 0.1;
+
+N = 14987;
+I0_case1 = 187;
+R0 = 68;
+S0_case1 = N - I0_case1 - R0;
+
+I_star = 200;
+t0 = 0;
+t = 0:0.1:50;
+
+
+//I(0) <= I*
+
+function dx = epidemic_isolated(t, x)
+    // x(1) = S(t) - восприимчивые к болезни
+    // x(2) = I(t) - инфицированные
+    // x(3) = R(t) - здоровые с иммунитетом
+    dx(1) = 0;
+    dx(2) = -beta * x(2);
+    dx(3) = beta * x(2);
+endfunction
+
+x0_case1 = [S0_case1; I0_case1; R0];
+
+y_case1 = ode(x0_case1, t0, t, epidemic_isolated);
+
+scf(1);
+plot(t, y_case1(1,:), 'b-', 'LineWidth', 2);  // S(t) - синий
+plot(t, y_case1(2,:), 'r-', 'LineWidth', 2);  // I(t) - красный
+plot(t, y_case1(3,:), 'g-', 'LineWidth', 2);  // R(t) - зелёный
+
+xlabel('Время (t)');
+ylabel('Численность особей');
+title(['Случай 1: I(0) = ' + string(I0_case1) + ' <= I* = ' + string(I_star) + ' (Больные изолированы)']);
+legend(['S(t) - Восприимчивые'; 'I(t) - Инфицированные'; 'R(t) - Выздоровевшие'], 'box');
+xgrid();
+
+// Сохранение графика
+xs2png(0, 'epidemic_case1_scilab.png');
+
+// СЛУЧАЙ 2: I(0) > I*
+
+I0_case2 = 250;  // Это > I_star = 200
+S0_case2 = N - I0_case2 - R0;  // = 14987 - 250 - 68 = 14669
+
+function dx = epidemic_full(t, x)
+    dx(1) = -alpha * x(1);
+    dx(2) = alpha * x(1) - beta * x(2);
+    dx(3) = beta * x(2);
+endfunction
+
+x0_case2 = [S0_case2; I0_case2; R0];
+y_case2 = ode(x0_case2, t0, t, epidemic_full);
+
+// Построение графика
+scf(2);
+plot(t, y_case2(1,:), 'b-', 'LineWidth', 2);
+plot(t, y_case2(2,:), 'r-', 'LineWidth', 2);
+plot(t, y_case2(3,:), 'g-', 'LineWidth', 2);
+xlabel('Время (t)');
+ylabel('Численность особей');
+title(['Случай 2: I(0) = ' + string(I0_case2) + ' > I* = ' + string(I_star) + ' (Эпидемия)']);
+legend(['S(t) - Восприимчивые'; 'I(t) - Инфицированные'; 'R(t) - Выздоровевшие'], 'box');
+xgrid();
+
+// Сохранение графика
+xs2png(0, 'epidemic_case2_scilab.png');
+
+
