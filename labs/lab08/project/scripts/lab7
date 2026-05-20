@@ -1,0 +1,113 @@
+// Случай 1
+t1 = 0:0.1:15;
+x0 = 12;
+N = 1515;
+
+function g = k1(t)
+    g = 0.605;
+endfunction
+
+function v = p1(t)
+    v = 0.000015;
+endfunction
+
+function xd = f1(t, x)
+    xd = (k1(t) + p1(t)*x)*(N - x);
+endfunction
+
+x1 = ode(x0, 0, t1, f1);
+
+scf(1);
+plot(t1, x1, 'b-', 'LineWidth', 2);
+xlabel("t");
+ylabel("N(t)");
+title("График изменения интенсивности рекламы для первого случая");
+
+// Случай 2
+t2 = 0:0.0005:0.2;
+
+function g = k2(t)
+    g = 0.000025;
+endfunction
+
+function v = p2(t)
+    v = 0.205;
+endfunction
+
+function xd = f2(t, x)
+    xd = (k2(t) + p2(t)*x)*(N - x);
+endfunction
+
+x2 = ode(x0, 0, t2, f2);
+
+// Нахождение максимальной скорости
+dev2 = [];
+for i = 1:length(t2)
+    dev2(i) = (k2(t2(i)) + p2(t2(i))*x2(i))*(N - x2(i));
+end
+[max_dev2, idx_max2] = max(dev2);
+t_max2 = t2(idx_max2);
+
+scf(2);
+plot(t2, x2, 'r-', 'LineWidth', 2);
+plot(t2(idx_max2), x2(idx_max2), 'ro', 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+xlabel("t");
+ylabel("N(t)");
+title("График изменения интенсивности рекламы для второго случая");
+
+scf(3);
+plot(t2, dev2, 'g-', 'LineWidth', 2);
+xlabel("t");
+ylabel("dn/dt");
+title("График изменения скорости рекламы для второго случая");
+
+// Случай 3
+t3 = 0:0.01:8;
+
+function g = k3(t)
+    g = 0.05*sin(t);
+endfunction
+
+function v = p3(t)
+    v = 0.31*cos(t);
+endfunction
+
+function xd = f3(t, x)
+    xd = (k3(t) + p3(t)*x)*(N - x);
+endfunction
+
+x3 = ode(x0, 0, t3, f3);
+
+// Нахождение максимальной скорости
+dev3 = [];
+for i = 1:length(t3)
+    dev3(i) = (k3(t3(i)) + p3(t3(i))*x3(i))*(N - x3(i));
+end
+[max_dev3, idx_max3] = max(dev3);
+t_max3 = t3(idx_max3);
+
+scf(4);
+plot(t3, x3, 'm-', 'LineWidth', 2);
+plot(t3(idx_max3), x3(idx_max3), 'mo', 'MarkerSize', 8, 'MarkerFaceColor', 'm');
+xlabel("t");
+ylabel("N(t)");
+title("График изменения интенсивности рекламы для третьего случая");
+
+scf(5);
+plot(t3, dev3, 'c-', 'LineWidth', 2);
+xlabel("t");
+ylabel("dn/dt");
+title("График изменения скорости рекламы для третьего случая");
+
+// График коэффициентов (как в Julia рис. 4.4)
+t_coeff = 0:0.001:2.0;
+alpha1 = 0.05*sin(t_coeff);
+alpha2 = 0.31*cos(t_coeff);
+
+scf(6);
+plot(t_coeff, alpha1, 'b-', 'LineWidth', 2);
+plot(t_coeff, alpha2, 'r-', 'LineWidth', 2);
+xlabel("Время t");
+ylabel("Значения коэффициентов");
+title("График изменения коэффициентов модели для третьего случая");
+legend("α₁(t) = 0.05·sin(t)", "α₂(t) = 0.31·cos(t)");
